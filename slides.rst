@@ -1,11 +1,11 @@
-:title: Solarpunks
+:title: Soilpunk technical rider
 :author: Heerko van der Kooij
 :description: 
 :css: slides.css
 
 .. header::
 
-   Solarpunks ☀️🤘
+  Soilpunk 🌏🤘 - technical rider 
 
 ----
 
@@ -14,14 +14,17 @@ Solarpunks
 hardware setup
 =========================
 
-In these slides we'll guide you to installing, setting-up and uploading the HTML files to the ESP32 modules...
+In these slides we'll guide you to installing, setting-up and uploading the HTML files to the ESP32 modules. 
+We've already uploaded the correct firmware on the modules, so we're focussing just on getting the HTML on there. 
+
+This document is also viewable as `plain text <https://github.com/hackersanddesigners/Soilpunk_technical_setup/blob/master/slides.rst>`_
 
 We will following these steps, some are optional:
 
-#. `Installing the Arduino IDE <#/arduino>`_
-#. `Installing support the ESP32 boards in the Arduino IDE. <#/espboards>`_
-#. `Installing a driver for the ESP32 boards. <#/espdriver>`_
-#. Installing 
+#. `Installing the Arduino IDE <#arduino>`_
+#. `Installing support the ESP32 boards in the Arduino IDE. <#espboards>`_
+#. `Installing a driver for the ESP32 boards. <#espdriver>`_
+#. `Installing a plugin to upload the HTML to the board <#spiffs>`_
 
 ----
 
@@ -203,4 +206,40 @@ Install SPIFFS plugin
 
 The content of the small webpage we will put on the wifi modules is stored separately from the running code that takes care of publishing it. Therefore, it goes through a separate process from the usual Arduino IDE code upload process. To do this, you need to install a separate extension plug-in.
 
+----
+
+Download and install `the ESP32FS plug-in <https://github.com/me-no-dev/arduino-esp32fs-plugin/releases>`_
+
+Then create a folder called:
+
+* ``<home_dir>/Arduino/tools`` (Windows/Unix)
+* ``~/Documents/Arduino/tools`` (MacOS)
+
+.. image:: ./assets/images/arduino-esp32fs-00002.png
+  :alt: Screenshot of finder window open at Arduino, showing subfolders Tools
+
+----
+
+Copy unpacked ESP32FS into the subfolder tools
+
+.. image:: ./assets/images/arduino-esp32fs-00003.png
+  :alt: Screenshot of finder window open at tools with subfolder ESP32FS 
+
+----
+
+Be mindful with the construction of the folders. It should be installed as shown in the following figure. (Note also that the folder name is ESP32FS!)
+
+.. image:: ./assets/images/arduino-esp32fs-00004.png
+  :alt: Screenshot of finder wiindow open at tools, showing filepath - ESP32FS - tool - esp32fs.jar
+
+----
+
+After restarting the Arduino IDE, verify that the plug-in installation was successful. If successful, you will see a menu called ``ESP32 Sketch Data Upload`` added.
+
+.. image:: ./assets/images/arduino-esp32fs-00005.png
+  :alt: Screenshot of Arduino window with menu open at - Tools - ESP32 Sketch Data Upload
+
+----
+
+Make sure you have the WifiZineThrowie sketch open. When you click the ``ESP32 Sketch Data Upload`` menu option, it will move all the files in the ``/data`` folder to the ESP32 module's web page store.
 
