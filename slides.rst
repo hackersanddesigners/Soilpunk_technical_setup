@@ -9,22 +9,27 @@
 
 ----
 
-Solarpunks 
+Soilpunk 
 ==========
-hardware setup
+technical rider 
 =========================
 
-In these slides we'll guide you to installing, setting-up and uploading the HTML files to the ESP32 modules. 
+In these slides we'll guide you through installing, setting-up and uploading the HTML files to the ESP32 modules. 
 We've already uploaded the correct firmware on the modules, so we're focussing just on getting the HTML on there. 
 
-This document is also viewable as `plain text <https://github.com/hackersanddesigners/Soilpunk_technical_setup/blob/master/slides.rst>`_
+This document is viewable as `a webpage <https://github.com/hackersanddesigners/Soilpunk_technical_setup/blob/master/slides.rst>`_ or as `a slideshow <https://hackersanddesigners.github.io/Soilpunk_technical_setup/html_output/index.html>`_
 
-We will following these steps, some are optional:
+We'd suggest you set up one or two computers this way before the workshop, so that the participants can focus on the storytelling aspects of the workshop.
 
-#. `Installing the Arduino IDE <#arduino>`_
+----
+
+We will following these steps:
+
+#. `Downloading and installing the Arduino IDE <#arduino>`_
 #. `Installing support the ESP32 boards in the Arduino IDE. <#espboards>`_
 #. `Installing a driver for the ESP32 boards. <#espdriver>`_
 #. `Installing a plugin to upload the HTML to the board <#spiffs>`_
+#. `And lastly we upload the HTML to the board <#upload>`_
 
 ----
 
@@ -54,6 +59,13 @@ Install the Arduino IDE
 
 Add ESP32 boards
 ================
+
+.. image:: ./assets/images/SBC-NodeMCU-ESP32-01.png
+  :alt: An image of the ESP32 dev board
+
+To create the Wifi hotspots we use ESP32 development boards. The Arduino IDE does not support these by default, so we have to add them to the IDE.
+
+----
 
 Adding ESP32 boards to the Arduino IDE's board list.
 
@@ -85,12 +97,21 @@ And click "**Install**"
 
 ----
 
+If everything went well, you should now see an option to select "ESP32 dev module" in the menu under Tools > Boards.
+
+.. image:: ./assets/images/arduino_select_board.png
+	:alt: Selecting the ESP32 board in the Arduino IDE.
+
+Select it, by clicking on it. All the other settings that appear should be correct by default. 
+
+----
+
 :id: espdriver
 
 Install the ESP32 driver
 ========================
-
-Installing a USB device driver to communicate with the ESP32 module (chip name: SiliconLabs CP2012)
+On most systems the ESP module needs a USB driver to be able to communicate with your computer. 
+(chip name: SiliconLabs CP2012).
 
 #. `On Linux <#/driverlinux>`_
 #. `On Windows <#/driverwindows>`_
@@ -119,7 +140,7 @@ Linux 2.6.x
 
 Restart your computer.
 
-[`continue →→→ <#/checkdriver>`_ ] 
+[`continue to Checking your driver →→→ <#/checkdriver>`_ ] 
 
 ----
 
@@ -134,7 +155,7 @@ Windows driver
 
 Restart your computer.
 
-[`continue →→→ <#/checkdriver>`_  ] 
+[`continue to Checking your driver →→→ <#/checkdriver>`_  ] 
 
 ----
 
@@ -183,7 +204,6 @@ If there is an error message in the red box area, GateKeeper is interrupting the
 
 :data-x: r1500
 :data-y: r-1000
-
 :id: checkdriver
 
 Check driver
@@ -192,14 +212,14 @@ Check driver
 After starting the Arduino IDE, make sure it can communicate with the ESP32 module
 
 If communication is possible, there should be a new entry in the port list as shown in the picture below.
-On MacOS it will be called something like /dev/cu.SLAB_USBtoUART for other OSes this name might be different.
+On MacOS it will be called something like /dev/cu.SLAB_USBtoUART, on Windows it will be COMx (where x is a number), and on Linux it will probably call /dev/tty_something.
 
 .. image:: ./assets/images/arduino-esp32-comm.png
 
 ----
 
 :data-y: r0
-
+:id: spiffs
 
 Install SPIFFS plugin
 =====================
@@ -212,7 +232,8 @@ Download and install `the ESP32FS plug-in <https://github.com/me-no-dev/arduino-
 
 Then create a folder called:
 
-* ``<home_dir>/Arduino/tools`` (Windows/Unix)
+* ``<home_dir>/Arduino/tools`` (Unix)
+* ``My Documents\Arduino\tools`` (Windows)
 * ``~/Documents/Arduino/tools`` (MacOS)
 
 .. image:: ./assets/images/arduino-esp32fs-00002.png
@@ -232,6 +253,10 @@ Be mindful with the construction of the folders. It should be installed as shown
 .. image:: ./assets/images/arduino-esp32fs-00004.png
   :alt: Screenshot of finder wiindow open at tools, showing filepath - ESP32FS - tool - esp32fs.jar
 
+The final structure should be something like:
+
+``.../Arduino/tools/ESP32FS/tool/esp32fs.jarz``
+
 ----
 
 After restarting the Arduino IDE, verify that the plug-in installation was successful. If successful, you will see a menu called ``ESP32 Sketch Data Upload`` added.
@@ -240,6 +265,8 @@ After restarting the Arduino IDE, verify that the plug-in installation was succe
   :alt: Screenshot of Arduino window with menu open at - Tools - ESP32 Sketch Data Upload
 
 ----
+
+:id: upload
 
 Make sure you have the WifiZineThrowie sketch open. When you click the ``ESP32 Sketch Data Upload`` menu option, it will move all the files in the ``/data`` folder to the ESP32 module's web page store.
 
