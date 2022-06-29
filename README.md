@@ -1,6 +1,6 @@
 # Solarpunks - Hardware setup slides
 
-## [View the slides here](https://heerko.github.io/solarpunks/html_output/index.html)
+## [View the slides here](https://hackersanddesigners.github.io/Soilpunk_technical_setup/html_output/index.html)
 
 ----
 
